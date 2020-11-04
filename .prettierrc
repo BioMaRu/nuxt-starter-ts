@@ -8,5 +8,5 @@
 	"tabWidth": 4,
 	"bracketSpacing": true,
 	"files.autoSave": true,
-	"arrowParens": "always"
+	"arrowParens": "avoid"
 }
