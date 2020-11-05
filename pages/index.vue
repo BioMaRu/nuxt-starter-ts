@@ -1,16 +1,17 @@
 <template>
 	<div class="container">
 		<div>
-			<Logo />
+			<Logo :user="user" />
 			<h1 class="title">my-nuxt-starter</h1>
 			<div class="links">
 				<a
+					v-if="true"
 					href="https://nuxtjs.org/"
-					target="_blank"
 					rel="noopener noreferrer"
 					class="button--green"
+					target="_blank"
 				>
-					Documentation {{ message }}
+					Documentation
 				</a>
 				<a
 					href="https://github.com/nuxt/nuxt.js"
@@ -18,7 +19,7 @@
 					rel="noopener noreferrer"
 					class="button--grey"
 				>
-					GitHub {{ user }}
+					GitHub {{ message }}
 				</a>
 			</div>
 		</div>
@@ -26,34 +27,22 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from 'vue'
-
-interface User {
-	firstName: string
-	lastName: string
-}
+import Logo from '@/components/Logo.vue'
+import Vue from 'vue'
 
 export default Vue.extend({
-	props: {
-		user: {
-			type: Object,
-			required: true,
-		} as PropOptions<User>,
+	name: 'YourComponent',
+
+	components: {
+		Logo,
 	},
 
 	data() {
 		return {
+			user: {} as User,
 			message: 'This is a message',
 		}
 	},
-
-	computed: {
-		fullName(): string {
-			return `${this.user.firstName} ${this.user.lastName}`
-		},
-	},
-
-	mounted() {},
 })
 </script>
 

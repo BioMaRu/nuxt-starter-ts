@@ -21,5 +21,6 @@ module.exports = {
 		'comma-dangle': ['error', 'only-multiline'],
 		'vue/max-attributes-per-line': 'error',
 		'vue/html-indent': ['error', 'tab'],
+		'vue/order-in-components': ['error'],
 	},
 }
