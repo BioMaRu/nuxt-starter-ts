@@ -1,58 +1,77 @@
 <template>
 	<div class="container">
 		<div>
-			<Logo :user="user" />
+			<UserProfile :user="$store.state.user.data" />
+			<UserProfile :user="user" />
+
 			<h1 class="title">my-nuxt-starter</h1>
-			<div class="links">
-				<a
-					v-if="true"
-					href="https://nuxtjs.org/"
-					rel="noopener noreferrer"
-					class="button--green"
-					target="_blank"
-				>
-					Documentation
-				</a>
-				<a
-					href="https://github.com/nuxt/nuxt.js"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="button--grey"
-				>
-					GitHub {{ message }}
-				</a>
+
+			<button @click="showSpinnerFor2Sec">showSpinnerFor2Sec()</button>
+			<br />
+			<br />
+			<div>
+				<pre>{{ message | toUpperCase }}</pre>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import Logo from '@/components/Logo.vue'
 import Vue from 'vue'
 
-export default Vue.extend({
-	name: 'YourComponent',
+import UserProfile from '@/components/UserProfile.vue'
 
+export default Vue.extend({
 	components: {
-		Logo,
+		UserProfile,
 	},
 
 	data() {
 		return {
-			user: {} as User,
-			message: 'This is a message',
+			user: {
+				firstName: '',
+				lastName: '',
+			} as User,
+			message: 'MeSSagE',
 		}
+	},
+
+	mounted() {
+		this.fetchUser()
+	},
+
+	methods: {
+		showSpinnerFor2Sec(): void {
+			this.$appSpinner.start()
+
+			setTimeout(() => {
+				this.$appSpinner.stop()
+			}, 2000)
+		},
+		async fetchUser(): Promise<void> {
+			const u = await new Promise<User>(resolve =>
+				resolve({
+					firstName: 'BioMaRu',
+					lastName: 'from client',
+				}),
+			)
+
+			this.user = u
+		},
 	},
 })
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 body .container {
 	display: flex;
 	min-height: 100px;
+
 	align-items: center;
 	justify-content: center;
+
 	margin: 0 auto;
+
 	text-align: center;
 }
 
@@ -64,17 +83,5 @@ body .container {
 	font-size: 100px;
 	font-weight: 300;
 	letter-spacing: 1px;
-}
-
-.subtitle {
-	padding-bottom: 15px;
-	color: #526488;
-	font-size: 42px;
-	font-weight: 300;
-	word-spacing: 0;
-}
-
-.links {
-	padding-top: 15px;
 }
 </style>

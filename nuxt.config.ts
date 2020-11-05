@@ -1,7 +1,9 @@
-export default {
+import { NuxtConfig } from '@nuxt/types'
+
+const config: NuxtConfig = {
 	// Global page headers (https://go.nuxtjs.dev/config-head)
 	head: {
-		title: 'my-nuxt-starter',
+		title: 'nuxt-starter-ts',
 		meta: [
 			{ charset: 'utf-8' },
 			{
@@ -17,7 +19,10 @@ export default {
 	css: [],
 
 	// Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-	plugins: [],
+	plugins: [
+		{ src: '@/plugins/filter-to-upper-case', mode: 'all' },
+		{ src: '@/plugins/app-spinner', mode: 'client' },
+	],
 
 	// Auto import components (https://go.nuxtjs.dev/config-components)
 	components: true,
@@ -30,6 +35,7 @@ export default {
 		'@nuxtjs/stylelint-module',
 	],
 
+	// Build module global setting: stylelint
 	stylelint: {
 		fix: true,
 	},
@@ -40,3 +46,5 @@ export default {
 	// Build Configuration (https://go.nuxtjs.dev/config-build)
 	build: {},
 }
+
+export default config
